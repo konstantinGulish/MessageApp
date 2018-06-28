@@ -1,19 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Pets and owners</title>
+    <title>Messages</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Pets and their Owners</h1>
-        <div th:each="eachOwner:${ownerlist}">
-            <h2 th:text="${eachOwner.myName}"></h2>
-            <h3 th:text="${#lists.size(eachOwner.pets)>0}?'My Pets':'No pets for me'"></h3>
-                <div th:each="eachPet:${eachOwner.pets}">
-                    <p th:text="${eachPet.petName}"></p>
-                </div>
-        </div>
-    </div>
+<div class = "container">
+    <h1>Message Board</h1>
+<table class ="table">
+    <tr>
+        <th>Post By</th><br/>
+        <th>Thoughts</th><br/>
+        <th>Post Date</th><br/>
+        <th>Recipient</th><br/>
+        <th>Like</th><br/>
+        <th>Number of Like</th><br/>
+
+    </tr>
+    <tr th:each="message : ${messages}">
+        <td th:text="${message.writer}"></td>
+        <td th:text="${message.content}"></td>
+        <td th:text="${message.postDate}"></td>
+        <td><div th:each="eachRecipient: ${message.recipients}">
+            <p th:text="${eachRecipient.recipientName}"></p>
+    </div></td>
+        <td>
+
+            <form th:action="@{/update/{id}(id=${message.id})}"><button>Like</button></form>
+        </td>
+        <td th:each="eachLike:${message}" th:text="${#lists.size(message.likes)}"></td>
+
+  <!--      <tr th:each="eachRecipient: ${message.recipients}" >
+         <td th:text="${eachRecipient.recipientName}"></td>
+        <td><a th:each="eachLike:${likes}" th:href="@{/update/{id}(id=${eachLike.id})}"><button>Like</button></a></td>
+            <td th:each="eachLike:${likes}" th:text="${eachLike.counter}"></td>
+    </tr>-->
+</table>
+<a href="/addmessage"><button>Add Post</button></a><br/>
+</div>
 </body>
 </html>

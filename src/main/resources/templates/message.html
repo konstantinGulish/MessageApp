@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Write your message</title>
+</head>
+<body>
+    <div class="container">
+    <h1>Add a Post </h1>
+    <form th:action="@{/process}"
+          th:object="${message}"
+          method="post">
+        <div class="form-group">
+        <input type="hidden" th:field="*{id}"/>
+        Your name: <br/>
+        <input type="text" th:field="*{writer}"/>
+        <div th:if="${#fields.hasErrors('writer')}"
+             th:errors="*{writer}"></div><br/>
+        <br/>
+        </div>
+        <div class="form-group">
+        Share your thoughts <br/>
+        <textarea rows="10" th:field="*{content}"/>
+        <div th:if="${#fields.hasErrors('content')}"
+             th:errors="*{content}"></div><br/>
+        <br/>
+        </div>
+        <div class="form-group">
+        Post Date <br/>
+        <input type="text" th:field="*{postDate}"/>
+        <div th:if="${#fields.hasErrors('postDate')}"
+             th:errors="*{postDate}"></div><br/>
+        <br/><br/>
+        </div>
+        <div class="form-group">
+        <label>Recipients:</label><br/>
+        <select th:field="*{recipients}" multiple>
+            <option th:each="eachRecipient: ${recipientlist}" th:value="${eachRecipient.id}" th:text="${eachRecipient.recipientName}"></option>
+        </select>
+        <br/><br/>
+        </div>
+        <input type="submit" value="SEND IT"/>
+    </form>
+</div>
+</body>
+</html>

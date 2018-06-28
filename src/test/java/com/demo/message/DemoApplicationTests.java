@@ -1,4 +1,4 @@
-package me.afua.demo;
+package com.demo.message;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

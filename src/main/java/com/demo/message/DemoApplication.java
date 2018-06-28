@@ -1,4 +1,4 @@
-package me.afua.demo;
+package com.demo.message;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
